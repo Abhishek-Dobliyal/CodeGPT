@@ -1,18 +1,73 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="grid sm:grid-cols-2 grid-cols-1 h-screen">
+    <div class="container relative">
+      <div
+        class="flex justify-start mt-4 ml-4 text-xl align-center space-x-2 items-center"
+      >
+        <i class="fa-solid fa-code fa-bounce"></i>
+        <span class="font-semibold">CodeGPT</span>
+      </div>
+      <div class="container text-center mt-20 mb-16 sm:my-40">
+        <Header title="Code"></Header>
+        <Headline :text="headline"></Headline>
+      </div>
+      <div class="flex justify-start absolute bottom-0 items-center">
+        <span class="mx-3 mb-3 font-semibold"
+          >Backed by <span class="text-teal-600">ChatGPT</span></span
+        >
+      </div>
+    </div>
+    <div class="text-center text-white bg-black">
+      <ul v-for="obj in infoButtonContent" :key="obj">
+        <InfoButton :text="obj.text" :iconStyle="obj.iconStyle"></InfoButton>
+      </ul>
+      <button
+        class="bg-black border hover:bg-white hover:text-black text-white font-semibold px-4 py-3 rounded-lg mb-5 mt-3"
+        @click="this.$router.push('/playground')"
+      >
+        Get Started
+      </button>
+    </div>
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+<script setup>
+import Header from "@/components/Header.vue";
+import Headline from "@/components/Headline.vue";
+import InfoButton from "@/components/InfoButton.vue";
 
-export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
+const headline = "A utility to help organise and maintain your code.";
+const infoButtonContent = {
+  code: {
+    iconStyle: "fa-solid fa-file-code",
+    text: "Minimalistic code editor that ensures you don't overlook any coding tasks.",
+  },
+  refactor: {
+    iconStyle: "fa-solid fa-code-compare",
+    text: "Effortlessly refactor your code.",
+  },
+  prettify: {
+    iconStyle: "fa-solid fa-wand-magic-sparkles",
+    text: "Beautify those messy lines of code into a structed one.",
+  },
+  convert: {
+    iconStyle: "fa-solid fa-arrows-rotate",
+    text: "Convert your logic written in one language to another",
+  },
+};
+</script>
+
+<style scoped>
+.left,
+.right {
+  height: 100vh;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .left,
+  .right {
+    height: 100vh;
   }
 }
-</script>
+</style>
