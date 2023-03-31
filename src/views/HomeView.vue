@@ -7,7 +7,7 @@
         <i class="fa-solid fa-code fa-bounce"></i>
         <span class="font-semibold">CodeGPT</span>
       </div>
-      <div class="container text-center mt-20 mb-16 sm:my-40">
+      <div class="container text-center mt-20 mb-20 sm:my-40">
         <Header title="Code"></Header>
         <Headline :text="headline"></Headline>
       </div>
@@ -19,7 +19,7 @@
     </div>
     <div class="text-center text-white bg-black">
       <ul v-for="obj in infoButtonContent" :key="obj">
-        <InfoButton :text="obj.text" :iconStyle="obj.iconStyle"></InfoButton>
+        <InfoText :text="obj.text" :iconStyle="obj.iconStyle"></InfoText>
       </ul>
       <button
         class="bg-black border hover:bg-white hover:text-black text-white font-semibold px-4 py-3 rounded-lg mb-5 mt-3"
@@ -34,7 +34,7 @@
 <script setup>
 import Header from "@/components/Header.vue";
 import Headline from "@/components/Headline.vue";
-import InfoButton from "@/components/InfoButton.vue";
+import InfoText from "@/components/InfoText.vue";
 
 const headline = "A utility to help organise and maintain your code.";
 const infoButtonContent = {
@@ -48,7 +48,7 @@ const infoButtonContent = {
   },
   prettify: {
     iconStyle: "fa-solid fa-wand-magic-sparkles",
-    text: "Beautify those messy lines of code into a structed one.",
+    text: "Beautify those messy lines of code into structed ones.",
   },
   convert: {
     iconStyle: "fa-solid fa-arrows-rotate",
