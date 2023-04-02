@@ -1,6 +1,6 @@
 <template>
   <div class="grid sm:grid-cols-2 grid-cols-1 h-screen">
-    <div class="container relative mb-12">
+    <div class="container relative mb-4">
       <div
         class="flex justify-start mt-4 ml-4 text-xl align-center space-x-2 items-center cursor-pointer"
         @click="$router.push('/')"
@@ -13,10 +13,21 @@
         <Tooltip tip="Use ⇧ + Space for auto-hints."></Tooltip>
       </div>
       <div class="container text-center" v-if="showOptions">
-        <RefactorSetting></RefactorSetting>
+        <RefactorSetting
+          v-if="$store.state.playgroundOptions.refactor.isBtnPressed"
+        ></RefactorSetting>
+        <ConvertSetting
+          v-else-if="$store.state.playgroundOptions.convert.isBtnPressed"
+        ></ConvertSetting>
+        <PrettifySetting
+          v-else-if="$store.state.playgroundOptions.prettify.isBtnPressed"
+        ></PrettifySetting>
+        <CommentSetting
+          v-else-if="$store.state.playgroundOptions.comment.isBtnPressed"
+        ></CommentSetting>
         <button
           @click="null"
-          class="bg-black border hover:bg-white hover:text-black text-white font-semibold px-3 py-2 rounded-lg mt-3 hover:border-black hover:border-2"
+          class="bg-black border text-white font-semibold px-3 py-2 rounded-lg mt-7 hover:bg-gray-800"
         >
           Proceed
         </button>
@@ -63,10 +74,12 @@
       <div
         class="container mt-10 px-4 mb-3 flex justify-center items-center space-x-2 font-semibold sm:mt-14"
       >
-        <span>Want to contribute or suggest more features? </span>
+        <span class="text-medium"
+          >Want to contribute or suggest more features?
+        </span>
         <a href="https://github.com/Abhishek-Dobliyal">
           <i
-            class="fa-brands fa-github text-2xl hover:shadow-lg hover:shadow-orange-400"
+            class="fa-brands fa-github text-2xl hover:shadow-xl hover:shadow-teal-400"
           ></i>
         </a>
       </div>
@@ -79,6 +92,9 @@ import CodeArea from "@/components/CodeArea.vue";
 import Tooltip from "@/components/Tooltip.vue";
 import PlaygroundButton from "@/components/PlaygroundButton.vue";
 import RefactorSetting from "@/components/RefactorSetting.vue";
+import ConvertSetting from "@/components/ConvertSetting.vue";
+import PrettifySetting from "@/components/PrettifySetting.vue";
+import CommentSetting from "@/components/CommentSetting.vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
 

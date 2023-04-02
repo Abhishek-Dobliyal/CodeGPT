@@ -4,10 +4,11 @@
       <div class="max-w-screen-xl px-4 py-3 mx-auto md:px-6">
         <div class="flex items-center">
           <ul class="flex flex-row mt-0 mr-6 space-x-8 text-sm font-medium">
-            <SelectField
+            <SelectFieldEditor
               disabledOption="language"
-              :options="['python', 'javascript', 'go']"
-            ></SelectField>
+              :options="['python', 'javascript', 'go', 'c++', 'java']"
+              @change="changeLanguage"
+            ></SelectFieldEditor>
             <button class="text-white text-xl ml-24" @click="toggleTheme">
               <i class="fa-solid fa-moon" v-if="!isDark"></i>
               <i class="fa-solid fa-sun" v-else></i>
@@ -21,9 +22,9 @@
 </template>
 
 <script setup>
-import SelectField from "@/components/SelectField.vue";
+import SelectFieldEditor from "@/components/SelectFieldEditor.vue";
 import { useStore } from "vuex";
-import { ref, onMounted, reactive, watchEffect } from "vue";
+import { ref, onMounted, reactive, computed } from "vue";
 
 import * as CodeMirror from "codemirror";
 import "codemirror/lib/codemirror.css";
@@ -34,6 +35,7 @@ import "codemirror/theme/base16-light.css";
 import "codemirror/mode/python/python.js";
 import "codemirror/mode/javascript/javascript.js";
 import "codemirror/mode/go/go.js";
+import "codemirror/mode/clike/clike.js";
 import "codemirror/addon/display/autorefresh.js";
 import "codemirror/addon/edit/matchbrackets.js";
 import "codemirror/addon/edit/closebrackets";
@@ -50,7 +52,7 @@ onMounted(() => {
   editor = CodeMirror.fromTextArea(textarea.value, {
     lineNumbers: true,
     theme: "ayu-dark",
-    mode: "go",
+    mode: "",
     lineWrapping: true,
     autoRefresh: true,
     matchBrackets: true,
@@ -70,6 +72,16 @@ onMounted(() => {
 const toggleTheme = () => {
   isDark.value = !isDark.value;
   editor.setOption("theme", isDark.value ? "ayu-dark" : "base16-light");
+};
+
+const changeLanguage = () => {
+  let currLanguage = store.getters.getEditorContent.language;
+  if (currLanguage === "c++") {
+    currLanguage = "text/x-c++src";
+  } else if (currLanguage === "java") {
+    currLanguage = "text/x-java";
+  }
+  editor.setOption("mode", currLanguage);
 };
 </script>
 

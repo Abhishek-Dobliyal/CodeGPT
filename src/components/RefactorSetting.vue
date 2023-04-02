@@ -2,9 +2,9 @@
   <div class="container my-4">
     <ToggleButton
       label="Refactor Into Multiple Function(s)"
-      value="refactor-splitCode"
+      setting="refactor-splitCode"
     ></ToggleButton>
-    <ToggleButton label="Add Tests" value="refactor-addTests"></ToggleButton>
+    <ToggleButton label="Add Tests" setting="refactor-addTests"></ToggleButton>
   </div>
 </template>
 

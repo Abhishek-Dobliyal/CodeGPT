@@ -15,15 +15,16 @@ export default createStore({
       prettify: {
         isBtnPressed: false,
         indentSpace: 2,
+        useBestPractice: false,
       },
       comment: {
         isBtnPressed: false,
+        commentEveryLine: false,
+        brief: false,
       },
       convert: {
         isBtnPressed: false,
-      },
-      btnSelection: {
-        isFirstSelect: true,
+        to: "",
       },
     },
   },
@@ -33,9 +34,6 @@ export default createStore({
     },
     getPlaygroundOptions(state) {
       return state.playgroundOptions;
-    },
-    getBtnSelection(state) {
-      return state.playgroundOptions.btnSelection;
     },
   },
   mutations: {
@@ -47,9 +45,6 @@ export default createStore({
     },
     setPlaygroundOptions(state, payload) {
       state.playgroundOptions = payload;
-    },
-    setbtnSelection(state, payload) {
-      state.btnSelection.isFirstSelect = payload;
     },
   },
   actions: {},
