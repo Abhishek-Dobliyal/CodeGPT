@@ -2,27 +2,45 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
-    editor: null,
     editorContent: {
       text: "",
       language: "",
-      theme: "",
+    },
+    playgroundOptions: {
+      refactor: {
+        isBtnPressed: false,
+        splitCode: false,
+        addTests: false,
+      },
+      prettify: {
+        isBtnPressed: false,
+        indentSpace: 2,
+      },
+      comment: {
+        isBtnPressed: false,
+      },
+      convert: {
+        isBtnPressed: false,
+      },
     },
   },
   getters: {
     getEditorContent(state) {
       return state.editorContent;
     },
+    getPlaygroundOptions(state) {
+      return state.playgroundOptions;
+    },
   },
   mutations: {
-    setEditorElement(state, payload) {
-      state.editor = payload;
-    },
-    setEditorOtherProperty(state, payload) {
+    setEditorAttrs(state, payload) {
       state.editorContent[payload.property] = payload.val;
     },
-    setEditorTextProperty(state, payload) {
+    setEditorText(state, payload) {
       state.editorContent.text = payload;
+    },
+    setPlaygroundOptions(state, payload) {
+      state.playgroundOptions = payload;
     },
   },
   actions: {},

@@ -7,7 +7,7 @@
         <i class="fa-solid fa-code fa-bounce"></i>
         <span class="font-semibold">CodeGPT</span>
       </div>
-      <div class="container text-center mt-20 mb-20 sm:my-40">
+      <div class="container text-center my-20 sm:my-40">
         <Header title="Code"></Header>
         <Headline :text="headline"></Headline>
       </div>
@@ -22,8 +22,8 @@
         <InfoText :text="obj.text" :iconStyle="obj.iconStyle"></InfoText>
       </ul>
       <button
-        class="bg-black border hover:bg-white hover:text-black text-white font-semibold px-4 py-3 rounded-lg mb-5 mt-3"
-        @click="this.$router.push('/playground')"
+        class="bg-black border-2 hover:bg-white hover:text-black text-white font-semibold px-4 py-2 rounded-lg mb-5 mt-3"
+        @click="$router.push('/playground')"
       >
         Get Started
       </button>
@@ -38,9 +38,9 @@ import InfoText from "@/components/InfoText.vue";
 
 const headline = "A utility to help organise and maintain your code.";
 const infoButtonContent = {
-  code: {
-    iconStyle: "fa-solid fa-file-code",
-    text: "Minimalistic code editor that ensures you don't overlook any coding tasks.",
+  comment: {
+    iconStyle: "fa-solid fa-comment",
+    text: "Add comments to stay up-to-date with your code.",
   },
   refactor: {
     iconStyle: "fa-solid fa-code-compare",

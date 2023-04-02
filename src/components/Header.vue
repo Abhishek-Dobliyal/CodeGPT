@@ -12,11 +12,7 @@
 
 <script setup>
 import VueWriter from "vue-writer";
-
-const props = defineProps({
-  title: String,
-});
-const headerArr = ["Code", "Refactor", "Prettify", "Convert"];
+const headerArr = ["Comment", "Refactor", "Prettify", "Convert"];
 </script>
 
 <style scoped>

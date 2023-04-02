@@ -8,10 +8,10 @@
               disabledOption="language"
               :options="['python', 'javascript', 'go']"
             ></SelectField>
-            <SelectField
-              disabledOption="theme"
-              :options="['dracula', 'monokai', 'material']"
-            ></SelectField>
+            <button class="text-white text-xl ml-24" @click="toggleTheme">
+              <i class="fa-solid fa-moon" v-if="!isDark"></i>
+              <i class="fa-solid fa-sun" v-else></i>
+            </button>
           </ul>
         </div>
       </div>
@@ -23,15 +23,13 @@
 <script setup>
 import SelectField from "@/components/SelectField.vue";
 import { useStore } from "vuex";
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, reactive, watchEffect } from "vue";
 
 import * as CodeMirror from "codemirror";
 import "codemirror/lib/codemirror.css";
 
-import "codemirror/theme/blackboard.css";
-import "codemirror/theme/dracula.css";
-import "codemirror/theme/monokai.css";
-import "codemirror/theme/material.css";
+import "codemirror/theme/ayu-dark.css";
+import "codemirror/theme/base16-light.css";
 
 import "codemirror/mode/python/python.js";
 import "codemirror/mode/javascript/javascript.js";
@@ -45,11 +43,13 @@ import "codemirror/addon/hint/anyword-hint";
 
 const store = useStore();
 const textarea = ref(null);
+const isDark = ref(true);
+let editor = reactive({});
 
 onMounted(() => {
-  const editor = CodeMirror.fromTextArea(textarea.value, {
+  editor = CodeMirror.fromTextArea(textarea.value, {
     lineNumbers: true,
-    theme: "blackboard",
+    theme: "ayu-dark",
     mode: "go",
     lineWrapping: true,
     autoRefresh: true,
@@ -59,14 +59,17 @@ onMounted(() => {
       "Shift-Space": "autocomplete",
     },
   });
-  store.commit("setEditorElement", editor);
+
   const wrapperEle = editor.getWrapperElement();
   wrapperEle.classList.add("p-2");
   wrapperEle.classList.add("rounded-lg");
+  wrapperEle.classList.add("border-2");
+  wrapperEle.classList.add("border-black");
 });
 
-const log = () => {
-  console.log(store.state.editor);
+const toggleTheme = () => {
+  isDark.value = !isDark.value;
+  editor.setOption("theme", isDark.value ? "ayu-dark" : "base16-light");
 };
 </script>
 

@@ -29,7 +29,7 @@ const props = defineProps({
 
 const selectedValue = ref("");
 const setEditorProperty = () => {
-  store.commit("setEditorOtherProperty", {
+  store.commit("setEditorAttrs", {
     property: props.disabledOption,
     val: selectedValue.value,
   });
