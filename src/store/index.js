@@ -22,6 +22,9 @@ export default createStore({
       convert: {
         isBtnPressed: false,
       },
+      btnSelection: {
+        isFirstSelect: true,
+      },
     },
   },
   getters: {
@@ -30,6 +33,9 @@ export default createStore({
     },
     getPlaygroundOptions(state) {
       return state.playgroundOptions;
+    },
+    getBtnSelection(state) {
+      return state.playgroundOptions.btnSelection;
     },
   },
   mutations: {
@@ -41,6 +47,9 @@ export default createStore({
     },
     setPlaygroundOptions(state, payload) {
       state.playgroundOptions = payload;
+    },
+    setbtnSelection(state, payload) {
+      state.btnSelection.isFirstSelect = payload;
     },
   },
   actions: {},

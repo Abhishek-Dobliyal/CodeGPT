@@ -12,7 +12,7 @@
       <div class="container absolute inset-y-0 right-0 w-16 mt-1">
         <Tooltip tip="Use ⇧ + Space for auto-hints."></Tooltip>
       </div>
-      <div class="container text-center" v-if="showSettings">
+      <div class="container text-center" v-if="showOptions">
         <RefactorSetting></RefactorSetting>
         <button
           @click="null"
@@ -60,12 +60,16 @@
           iconStyle="fa-solid fa-question"
         ></PlaygroundButton>
       </div>
-      <button
-        class="bg-black border-2 hover:bg-white hover:text-black text-white font-semibold px-4 py-2 rounded-lg mb-4 mt-5 sm:mt-12"
-        @click="log"
+      <div
+        class="container mt-10 px-4 mb-3 flex justify-center items-center space-x-2 font-semibold sm:mt-14"
       >
-        Clear Selection
-      </button>
+        <span>Want to contribute or suggest more features? </span>
+        <a href="https://github.com/Abhishek-Dobliyal">
+          <i
+            class="fa-brands fa-github text-2xl hover:shadow-lg hover:shadow-orange-400"
+          ></i>
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -79,7 +83,7 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
-const showSettings = computed(() => {
+const showOptions = computed(() => {
   const currPlaygroundOptions = store.getters.getPlaygroundOptions;
   for (const key in currPlaygroundOptions) {
     if (currPlaygroundOptions[key].isBtnPressed) {
@@ -88,10 +92,6 @@ const showSettings = computed(() => {
   }
   return false;
 });
-
-const log = () => {
-  console.log("Hello");
-};
 </script>
 
 <style></style>
