@@ -6,8 +6,9 @@
     ></ToggleButton>
     <Input
       setting="prettify-indentSpace"
-      lowerInfoText="Possible size limit: 2, 4 or 6"
+      lowerInfoText="Recommended size: 2 or 4"
       placeholderText="Enter indent size"
+      :computedFunc="checkIndentSize"
     ></Input>
   </div>
 </template>
@@ -15,4 +16,8 @@
 <script setup>
 import ToggleButton from "@/components/ToggleButton.vue";
 import Input from "@/components/Input.vue";
+
+const checkIndentSize = (num) => {
+  return num % 2 !== 0;
+};
 </script>

@@ -25,6 +25,8 @@ export default createStore({
       convert: {
         isBtnPressed: false,
         to: "",
+        start: -1,
+        end: -1,
       },
     },
   },

@@ -8,7 +8,7 @@
         class="w-11 h-6 bg-black rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 outline-none after:transition-allpeer-checked:bg-black border-2 border-black"
       ></div>
     </label>
-    <span class="ml-3 text-md font-medium text-black break-normal text-left capitalize">{{
+    <span class="ml-3 text-md font-semibold text-black break-normal text-left capitalize">{{
       label
     }}</span>
   </div>

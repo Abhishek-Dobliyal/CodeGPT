@@ -26,21 +26,20 @@ const store = useStore();
 const selectedValue = ref("");
 
 const props = defineProps({
-  onChangeMethod: String,
-  for: String,
-  value: String,
   options: Array,
   disabledOption: String,
+  setting: String,
 });
 
 const setProperty = () => {
   let currPlaygroundOptions = store.getters.getPlaygroundOptions;
+  let [option, optionKey] = props.setting.trim().split("-");
   for (const key in currPlaygroundOptions) {
-    if (key === props.for) {
-      currPlaygroundOptions[key][val] = selectedValue.value;
+    if (key === option) {
+      currPlaygroundOptions[key][optionKey] = selectedValue.value.toLowerCase();
       break;
     }
   }
-  store.commit("setPlaygroundOptions", currPlaygroundOptions);
+  console.log(store.getters.getPlaygroundOptions);
 };
 </script>

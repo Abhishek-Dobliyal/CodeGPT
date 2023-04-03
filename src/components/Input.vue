@@ -13,7 +13,7 @@
         @change="updateVal"
       />
       <p class="text-sm mt-1" v-if="showInfo">
-        <span class="font-medium">{{ lowerInfoText }}</span>
+        <span class="font-semibold">{{ lowerInfoText }}</span>
       </p>
     </div>
   </div>
@@ -29,24 +29,29 @@ const props = defineProps({
   setting: String,
   lowerInfoText: String,
   placeholderText: String,
+  computedFunc: Function,
 });
 
 const num = ref();
 
 const showInfo = computed(() => {
-  if (num.value < 0) {
-    num.value = 2;
+  if (!props.computedFunc || !num.value) {
+    return;
   }
-  if (num.value > 6) {
-    num.value = 6;
-  }
-  return num.value % 2 !== 0 || !(num.value > 0 && num.value <= 6);
+  return props.computedFunc(num.value);
 });
 
 const updateVal = () => {
-  let [option, key] = props.setting.split("-");
+  let [option, ...keys] = props.setting.replace(" ", "").split("-");
   let currPlaygroundOptions = store.getters.getPlaygroundOptions;
-  currPlaygroundOptions[option][key] = parseInt(num.value);
+
+  if (keys.length == 1) {
+    currPlaygroundOptions[option][keys[0]] = parseInt(num.value);
+  } else {
+    let [startLine, endLine] = num.value.replace(" ", "").split("-");
+    currPlaygroundOptions[option][keys[0]] = parseInt(startLine);
+    currPlaygroundOptions[option][keys[1]] = parseInt(endLine);
+  }
   console.log(store.getters.getPlaygroundOptions);
 };
 </script>
