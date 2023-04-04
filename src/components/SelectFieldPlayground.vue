@@ -40,6 +40,5 @@ const setProperty = () => {
       break;
     }
   }
-  console.log(store.getters.getPlaygroundOptions);
 };
 </script>

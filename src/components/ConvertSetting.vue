@@ -12,7 +12,7 @@
       setting="convert-start-end"
       placeholderText="Enter start-end line number"
       lowerInfoText="[start-end] line number"
-      :computedFunc="showInfo"
+      :computedFunc="highlightText"
     ></Input>
   </div>
 </template>
@@ -20,20 +20,55 @@
 <script setup>
 import SelectFieldPlayground from "@/components/SelectFieldPlayground.vue";
 import Input from "@/components/Input.vue";
-import { computed } from "vue";
+import { useStore } from "vuex";
 
-const showInfo = (range) => {
-  let hypen = 0,
-    digits = 0;
-  for (const ch of [...range]) {
-    if (ch == "-") hypen++;
+const store = useStore();
+const editor = store.getters.getEditorInstance;
+const numLines = editor.lineCount();
+const editorContent = store.getters.getEditorContent;
+
+const highlightText = (range) => {
+  let digits = 0;
+  for (const ch of range.split("-")) {
     if (isNum(ch)) digits++;
   }
-
-  return hypen != 1 || digits != 2;
+  if (digits == 2) {
+    let [start, end] = range.split("-").map((ele) => {
+      return parseInt(ele);
+    });
+    console.log(start, end, !start, !end);
+    if (!start || start >= end || start > numLines || !end) {
+      clearHighlight();
+      return true;
+    }
+    const marker = editor.markText(
+      { line: start - 2 },
+      { line: end - 1 },
+      {
+        className:
+          editor.getOption("theme") === "ayu-dark"
+            ? "highlight-dark"
+            : "highlight-light",
+      }
+    );
+    let lines = marker.lines;
+    for (let i = start - 1; i <= end - 1; i++) {
+      if (lines[i] && "text" in lines[i])
+        editorContent.highlightedText += lines[i].text;
+    }
+    console.log(store.state);
+    return false;
+  }
+  clearHighlight();
+  editorContent.highlightedText = "";
+  return true;
 };
 
 const isNum = (n) => {
   return !isNaN(parseInt(n)) && isFinite(n);
+};
+
+const clearHighlight = () => {
+  editor.doc.getAllMarks().forEach((marker) => marker.clear());
 };
 </script>

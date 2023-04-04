@@ -2,9 +2,11 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
+    editorInstance: null,
     editorContent: {
       text: "",
       language: "",
+      highlightedText: "",
     },
     playgroundOptions: {
       refactor: {
@@ -25,8 +27,6 @@ export default createStore({
       convert: {
         isBtnPressed: false,
         to: "",
-        start: -1,
-        end: -1,
       },
     },
   },
@@ -36,6 +36,9 @@ export default createStore({
     },
     getPlaygroundOptions(state) {
       return state.playgroundOptions;
+    },
+    getEditorInstance(state) {
+      return state.editorInstance;
     },
   },
   mutations: {
@@ -47,6 +50,9 @@ export default createStore({
     },
     setPlaygroundOptions(state, payload) {
       state.playgroundOptions = payload;
+    },
+    setEditorInstance(state, payload) {
+      state.editorInstance = payload;
     },
   },
   actions: {},

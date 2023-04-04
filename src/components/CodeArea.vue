@@ -38,10 +38,10 @@ import "codemirror/mode/go/go.js";
 import "codemirror/mode/clike/clike.js";
 import "codemirror/addon/display/autorefresh.js";
 import "codemirror/addon/edit/matchbrackets.js";
-import "codemirror/addon/edit/closebrackets";
-import "codemirror/addon/hint/show-hint";
-import "codemirror/addon/hint/show-hint.css";
-import "codemirror/addon/hint/anyword-hint";
+import "codemirror/addon/edit/closebrackets.js";
+import "codemirror/addon/selection/mark-selection.js";
+import "codemirror/addon/hint/show-hint.js";
+import "codemirror/addon/hint/anyword-hint.js";
 
 const store = useStore();
 const textarea = ref(null);
@@ -60,6 +60,7 @@ onMounted(() => {
     extraKeys: {
       "Shift-Space": "autocomplete",
     },
+    styleSelectedText: true,
   });
 
   const wrapperEle = editor.getWrapperElement();
@@ -67,10 +68,19 @@ onMounted(() => {
   wrapperEle.classList.add("rounded-lg");
   wrapperEle.classList.add("border-2");
   wrapperEle.classList.add("border-black");
+
+  editor.on("change", () => {
+    store.getters.getEditorContent.text = editor.getValue();
+  });
+
+  store.commit("setEditorInstance", editor);
 });
 
 const toggleTheme = () => {
   isDark.value = !isDark.value;
+  editor.doc.getAllMarks().forEach((m) => {
+    m.className = isDark.value ? "highlight-dark" : "highlight-light";
+  });
   editor.setOption("theme", isDark.value ? "ayu-dark" : "base16-light");
 };
 
@@ -99,5 +109,12 @@ const changeLanguage = () => {
 select {
   border-right: 10px solid black;
   outline: none;
+}
+
+.highlight-light {
+  background-color: lightblue;
+}
+.highlight-dark {
+  background-color: grey;
 }
 </style>

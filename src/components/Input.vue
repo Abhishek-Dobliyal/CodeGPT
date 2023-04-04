@@ -10,7 +10,6 @@
         class="bg-black text-white placeholder:text-white text-sm rounded-lg block p-2.5 outline-none placeholder:text-xs"
         :placeholder="placeholderText"
         v-model="num"
-        @change="updateVal"
       />
       <p class="text-sm mt-1" v-if="showInfo">
         <span class="font-semibold">{{ lowerInfoText }}</span>
@@ -36,24 +35,10 @@ const num = ref();
 
 const showInfo = computed(() => {
   if (!props.computedFunc || !num.value) {
-    return;
+    return true;
   }
   return props.computedFunc(num.value);
 });
-
-const updateVal = () => {
-  let [option, ...keys] = props.setting.replace(" ", "").split("-");
-  let currPlaygroundOptions = store.getters.getPlaygroundOptions;
-
-  if (keys.length == 1) {
-    currPlaygroundOptions[option][keys[0]] = parseInt(num.value);
-  } else {
-    let [startLine, endLine] = num.value.replace(" ", "").split("-");
-    currPlaygroundOptions[option][keys[0]] = parseInt(startLine);
-    currPlaygroundOptions[option][keys[1]] = parseInt(endLine);
-  }
-  console.log(store.getters.getPlaygroundOptions);
-};
 </script>
 
 <style scoped></style>
