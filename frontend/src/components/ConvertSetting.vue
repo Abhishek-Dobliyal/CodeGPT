@@ -52,9 +52,10 @@ const highlightText = (range) => {
       }
     );
     let lines = marker.lines;
+    console.log(lines);
     for (let i = start - 1; i <= end - 1; i++) {
       if (lines[i] && "text" in lines[i])
-        editorContent.highlightedText += lines[i].text;
+        editorContent.highlightedText += lines[i].text + "\n";
     }
     console.log(store.state);
     return false;
