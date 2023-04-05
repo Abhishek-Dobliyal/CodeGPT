@@ -1,6 +1,6 @@
 <template>
   <div class="grid sm:grid-cols-2 grid-cols-1 h-screen">
-    <div class="container relative">
+    <div class="container relative animate__animated animate__fadeInDown">
       <div
         class="flex justify-start mt-4 ml-4 text-xl align-center space-x-2 items-center"
       >
@@ -17,7 +17,9 @@
         >
       </div>
     </div>
-    <div class="text-center text-white bg-black">
+    <div
+      class="text-center text-white bg-black animate__animated animate__fadeInUp"
+    >
       <ul v-for="obj in infoButtonContent" :key="obj">
         <InfoText :text="obj.text" :iconStyle="obj.iconStyle"></InfoText>
       </ul>
