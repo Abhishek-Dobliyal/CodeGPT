@@ -13,6 +13,17 @@
               <i class="fa-solid fa-moon" v-if="!isDark"></i>
               <i class="fa-solid fa-sun" v-else></i>
             </button>
+            <button
+              class="text-white text-xl ml-24"
+              @click="copy"
+              :disabled="isCopied"
+            >
+              <i class="fa-solid fa-copy" v-if="!isCopied"></i>
+              <i class="fa-solid fa-check" v-else></i>
+            </button>
+            <button class="text-white text-xl ml-24" @click="save">
+              <i class="fa-solid fa-floppy-disk"></i>
+            </button>
           </ul>
         </div>
       </div>
@@ -25,6 +36,7 @@
 import SelectFieldEditor from "@/components/SelectFieldEditor.vue";
 import { useStore } from "vuex";
 import { ref, onMounted, reactive, computed } from "vue";
+import { saveAs } from "file-saver";
 
 import * as CodeMirror from "codemirror";
 import "codemirror/lib/codemirror.css";
@@ -46,6 +58,7 @@ import "codemirror/addon/hint/anyword-hint.js";
 const store = useStore();
 const textarea = ref(null);
 const isDark = ref(true);
+const isCopied = ref(false);
 let editor = reactive({});
 
 onMounted(() => {
@@ -92,6 +105,24 @@ const changeLanguage = () => {
     currLanguage = "text/x-java";
   }
   editor.setOption("mode", currLanguage);
+};
+
+const copy = () => {
+  isCopied.value = true;
+  navigator.clipboard.writeText(editor.getValue());
+  setTimeout(() => {
+    isCopied.value = false;
+  }, 1500);
+};
+
+const save = () => {
+  const editorText = editor.getValue();
+  if (editorText.length == 1) {
+    return;
+  }
+
+  let textBlob = new Blob([editorText], { type: "text/plain" });
+  saveAs(textBlob, "codeGPT_text.txt");
 };
 </script>
 
