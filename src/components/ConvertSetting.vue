@@ -1,5 +1,5 @@
 <template>
-  <div class="container text-left">
+  <div class="container text-left animate__animated animate__fadeIn">
     <div class="flex items-center justify-start mt-4 space-x-3 ml-4">
       <span class="text-md font-semibold">Convert To</span>
       <SelectFieldPlayground
@@ -36,7 +36,6 @@ const highlightText = (range) => {
     let [start, end] = range.split("-").map((ele) => {
       return parseInt(ele);
     });
-    console.log(start, end, !start, !end);
     if (!start || start >= end || start > numLines || !end) {
       clearHighlight();
       return true;
@@ -52,12 +51,10 @@ const highlightText = (range) => {
       }
     );
     let lines = marker.lines;
-    console.log(lines);
     for (let i = start - 1; i <= end - 1; i++) {
       if (lines[i] && "text" in lines[i])
         editorContent.highlightedText += lines[i].text + "\n";
     }
-    console.log(store.state);
     return false;
   }
   clearHighlight();
