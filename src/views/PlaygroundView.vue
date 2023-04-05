@@ -1,6 +1,6 @@
 <template>
   <div class="grid sm:grid-cols-2 grid-cols-1 h-screen">
-    <div class="container relative mb-4">
+    <div class="container mb-4">
       <div
         class="flex justify-start mt-4 ml-4 text-xl align-center space-x-2 items-center cursor-pointer"
         @click="$router.push('/')"
@@ -9,9 +9,12 @@
         <span class="font-semibold">CodeGPT</span>
       </div>
       <CodeArea></CodeArea>
-      <div class="container absolute inset-y-0 right-0 w-16 mt-1">
-        <Tooltip tip="Use ⇧ + Space for auto-hints."></Tooltip>
-      </div>
+      <Bullets
+        :points="[
+          'Use ⇧ + ⎵ to display hints.',
+          'Sublime Text key-bindings are the default.',
+        ]"
+      ></Bullets>
       <div class="container text-center" v-if="showOptions">
         <RefactorSetting
           v-if="$store.state.playgroundOptions.refactor.isBtnPressed"
@@ -95,6 +98,7 @@ import RefactorSetting from "@/components/RefactorSetting.vue";
 import ConvertSetting from "@/components/ConvertSetting.vue";
 import PrettifySetting from "@/components/PrettifySetting.vue";
 import CommentSetting from "@/components/CommentSetting.vue";
+import Bullets from "@/components/Bullets.vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
 

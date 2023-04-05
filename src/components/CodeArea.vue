@@ -54,6 +54,7 @@ import "codemirror/addon/edit/closebrackets.js";
 import "codemirror/addon/selection/mark-selection.js";
 import "codemirror/addon/hint/show-hint.js";
 import "codemirror/addon/hint/anyword-hint.js";
+import "codemirror/keymap/sublime.js";
 
 const store = useStore();
 const textarea = ref(null);
@@ -74,6 +75,7 @@ onMounted(() => {
       "Shift-Space": "autocomplete",
     },
     styleSelectedText: true,
+    keyMap: "sublime",
   });
 
   const wrapperEle = editor.getWrapperElement();
