@@ -1,5 +1,5 @@
 <template>
-  <div class="container my-4">
+  <div class="container my-4 animate__animated animate__fadeIn">
     <ToggleButton
       label="Follow best practices"
       setting="prettify-useBestPractice"

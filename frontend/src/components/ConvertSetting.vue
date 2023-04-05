@@ -1,5 +1,5 @@
 <template>
-  <div class="container text-left">
+  <div class="container text-left animate__animated animate__fadeIn">
     <div class="flex items-center justify-start mt-4 space-x-3 ml-4">
       <span class="text-md font-semibold">Convert To</span>
       <SelectFieldPlayground
