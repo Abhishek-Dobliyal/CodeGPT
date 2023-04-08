@@ -1,6 +1,10 @@
 # CodeGPT
 A utility to assist and automate coding tasks.
 
+![](demo/codegpt_demo.gif)
+
+> Note: Demo of U.I (and not the whole working)
+
 ## Installations and Dependencies
 
 - [GoLang](https://go.dev/)
@@ -75,6 +79,7 @@ np run serve
 
 ## Todo
 
+- [ ] Wrap up backend
 - [ ] Include more features
 - [ ] Work on issues (if any)
 - [ ] Deployment
