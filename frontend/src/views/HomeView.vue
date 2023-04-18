@@ -56,6 +56,10 @@ const infoButtonContent = {
     iconStyle: "fa-solid fa-arrows-rotate",
     text: "Convert your logic written in one language to another",
   },
+  review: {
+    iconStyle: "fa-solid fa-laptop-code",
+    text: "Code reviews on the fly",
+  },
 };
 </script>
 

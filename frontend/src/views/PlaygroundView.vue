@@ -9,13 +9,7 @@
         <span class="font-semibold">CodeGPT</span>
       </div>
       <CodeArea></CodeArea>
-      <Bullets
-        :points="[
-          'Use ⇧ + ⎵ to display hints.',
-          'Sublime Text key-bindings are the default.',
-        ]"
-        v-if="!showOptions"
-      ></Bullets>
+      <Bullets :points="bulletPoints" v-if="!showOptions"></Bullets>
       <div class="container text-center" v-if="showOptions">
         <RefactorSetting
           v-if="$store.state.playgroundOptions.refactor.isBtnPressed"
@@ -69,8 +63,8 @@
           value="comment"
         ></PlaygroundButton>
         <PlaygroundButton
-          text="Coming Soon"
-          iconStyle="fa-solid fa-question"
+          text="Review"
+          iconStyle="fa-solid fa-laptop-code"
         ></PlaygroundButton>
         <PlaygroundButton
           text="Coming Soon"
@@ -102,10 +96,29 @@ import ConvertSetting from "@/components/ConvertSetting.vue";
 import PrettifySetting from "@/components/PrettifySetting.vue";
 import CommentSetting from "@/components/CommentSetting.vue";
 import Bullets from "@/components/Bullets.vue";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
+
+const bulletPoints = ref([
+  {
+    point: "Use ⇧ + ⎵ to display hints.",
+    hyperlink: "",
+    hyperlinkTxt: "",
+  },
+  {
+    point: "Sublime Text key-bindings are the default.",
+    hyperlink: "",
+    hyperlinkTxt: "",
+  },
+  {
+    point: "View the ",
+    hyperlink: "https://rowannicholls.github.io/sublime_text/key_bindings.html",
+    hyperlinkTxt: "ST4 Bindings",
+  },
+]);
+
 const showOptions = computed(() => {
   const currPlaygroundOptions = store.getters.getPlaygroundOptions;
   for (const key in currPlaygroundOptions) {
