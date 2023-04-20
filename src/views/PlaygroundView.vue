@@ -63,8 +63,8 @@
           value="comment"
         ></PlaygroundButton>
         <PlaygroundButton
-          text="Coming Soon"
-          iconStyle="fa-solid fa-question"
+          text="Review"
+          iconStyle="fa-solid fa-laptop-code"
         ></PlaygroundButton>
         <PlaygroundButton
           text="Coming Soon"
