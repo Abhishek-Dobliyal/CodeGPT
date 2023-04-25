@@ -6,7 +6,7 @@ A utility to assist and automate coding tasks.
 
 U.I Demo                   |   View 1                  |         View 2
 :-------------------------:|:-------------------------:|:-------------------------:
-![](demo/demo.gif)         |  ![](demo/s1.png)         |     ![](demo/s2.png)
+![](codegpt_demo/demo.gif)         |  ![](demo/s1.png)         |     ![](demo/s2.png)
 
 > Note: Demo of U.I (and not the whole working)
 
