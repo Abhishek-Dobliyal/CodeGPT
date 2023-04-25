@@ -1,6 +1,10 @@
 # CodeGPT
 A utility to assist and automate coding tasks.
 
+## Demo
+
+        U.I Demo
+:-------------------------:
 ![](demo/codegpt_demo.gif)
 
 > Note: Demo of U.I (and not the whole working)
