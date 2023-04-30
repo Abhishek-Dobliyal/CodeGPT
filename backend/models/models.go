@@ -19,6 +19,5 @@ type Response struct {
 }
 
 type ChatGPTApiResponse struct {
-	Result      *string
-	IsRetrieved bool
+	Result *string
 }
